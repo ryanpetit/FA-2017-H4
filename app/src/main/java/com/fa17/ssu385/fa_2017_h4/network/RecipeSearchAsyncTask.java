@@ -45,7 +45,7 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
     @Override
     protected void onPostExecute(RecipeModel recipeModel) {
         super.onPostExecute(recipeModel);
-        recipeCallbackListener.onRecipeCallback(recipeModel);
+        this.recipeCallbackListener.onRecipeCallback(recipeModel);
     }
 
     public void setRecipeCallbackListener(RecipeCallbackListener recipeCallbackListener) {
