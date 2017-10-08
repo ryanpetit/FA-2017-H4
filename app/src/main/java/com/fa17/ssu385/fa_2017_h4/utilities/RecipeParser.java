@@ -24,6 +24,7 @@ public class RecipeParser {
             // do something useful with exception
             System.out.println("Caught exception in recipeFromJson");
             System.out.println(e);
+            return null;
         }
         return model;
     }

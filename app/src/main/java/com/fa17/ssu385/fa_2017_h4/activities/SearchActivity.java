@@ -22,6 +22,7 @@ public class SearchActivity extends AppCompatActivity {
     private EditText searchEditText;
     private Button searchButton;
     private RecipeCallbackListener recipeCallbackListener;
+    private static final String errorMessage = "Something bad happened. Try again!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,11 @@ public class SearchActivity extends AppCompatActivity {
                 recipeCallbackListener = new RecipeCallbackListener() {
                     @Override
                     public void onRecipeCallback(RecipeModel recipeModel) {
-                        recipeName.setText(recipeModel.getRecipeName());
+                        if (recipeModel == null) {
+                            recipeName.setText(errorMessage);
+                        } else {
+                            recipeName.setText(recipeModel.getRecipeName());
+                        }
                     }
                 };
 
