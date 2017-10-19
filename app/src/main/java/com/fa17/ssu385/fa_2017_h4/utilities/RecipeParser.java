@@ -17,6 +17,10 @@ public class RecipeParser {
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
+
+            JSONArray imgArray = recipe.getJSONArray("smallImageUrls");
+            model.setRecipeImageUrl(imgArray.getString(0));
+
         } catch (JSONException e) {
             // do something useful with exception
         }
