@@ -40,11 +40,11 @@ public class SearchActivity extends AppCompatActivity {
                         recipeName.setText(recipeModel.getRecipeName());
                     }
                 };
+                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+                task.setRecipeCallbackListener(recipeCallbackListener);
+                task.execute(searchEditText.getText().toString());
             }
         });
 
-        RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
-        task.setRecipeCallbackListener(recipeCallbackListener);
-        task.execute(searchEditText.getText().toString());
     }
 }
