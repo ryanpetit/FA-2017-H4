@@ -10,17 +10,34 @@ import org.json.JSONObject;
 public class RecipeParser {
     public static final RecipeModel recipeFromJson(String jsonString) {
         RecipeModel model = null;
+
         try {
+
+
             JSONObject response = new JSONObject(jsonString);
             JSONArray matches = response.getJSONArray("matches");
             JSONObject recipe = matches.getJSONObject(0);
 
-            JSONArray smallImageUrls = response.getJSONArray("smallImageUrls");
-            JSONObject recipeImageUrl = smallImageUrls.getJSONObject(0);
+            model = new RecipeModel();
+            model.setRecipeName(recipe.getString("recipeName"));
+
+            JSONArray url = response.getJSONArray("smallImageUrls");
+            JSONObject recipeImageUrl = url.getJSONObject(0);
+
+            model.setRecipeImageUrl(recipeImageUrl.getString("smallImageUrl"));
+
+
+           /*
+            * Why doesn't this work?
+
+            JSONArray smallImages = response.getJSONArray("smallImageUrls");
+
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
-            model.setRecipeImageUrl(recipeImageUrl.getString("recipeImageUrl"));
+            model.setRecipeImageUrl(smallImages.getString(0));
+
+            */
 
         } catch (JSONException e) {
             // do something useful with exception

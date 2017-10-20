@@ -20,10 +20,12 @@ public class SearchActivity extends AppCompatActivity {
     private EditText searchEditText;
     private Button searchButton;
     private RecipeCallbackListener recipeCallbackListener;
+    private static final String errorMessage = "Why is my damn recipeModel null?";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
 
         recipeName = (TextView)findViewById(R.id.recipe_name);
         recipeThumbnail = (ImageView)findViewById(R.id.recipe_thumbnail);
@@ -36,7 +38,11 @@ public class SearchActivity extends AppCompatActivity {
                 recipeCallbackListener = new RecipeCallbackListener() {
                     @Override
                     public void onRecipeCallback(RecipeModel recipeModel) {
-                        recipeName.setText(recipeModel.getRecipeName());
+                        if (recipeModel == null) {
+                            recipeName.setText(errorMessage);
+                        } else {
+                            recipeName.setText(recipeModel.getRecipeName());
+                        }
                     }
                 };
                 RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
@@ -44,8 +50,5 @@ public class SearchActivity extends AppCompatActivity {
                 task.execute(searchEditText.getText().toString());
             }
         });
-
-        setContentView(R.layout.activity_search);
-
     }
 }

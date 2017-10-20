@@ -31,13 +31,15 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
         Response response = null;
+
         try {
             response = client.newCall(request).execute();
-            if(response != null) {
-                return RecipeParser.recipeFromJson(response.body().toString());
+            if (response != null) {
+                return RecipeParser.recipeFromJson(response.body().string());
             }
-        } catch (IOException e) {
-            // do something with exception
+        }
+        catch(IOException e) {
+            //do something with exception
         }
         return null;
     }
@@ -45,7 +47,8 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
     @Override
     protected void onPostExecute(RecipeModel recipeModel) {
         super.onPostExecute(recipeModel);
-        this.recipeCallbackListener.onRecipeCallback(recipeModel);
+        recipeCallbackListener.onRecipeCallback(recipeModel);
+
     }
 
     public void setRecipeCallbackListener(RecipeCallbackListener recipeCallbackListener) {
