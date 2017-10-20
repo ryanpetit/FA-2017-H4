@@ -10,6 +10,7 @@ import org.json.JSONObject;
 public class RecipeParser {
     public static final RecipeModel recipeFromJson(String jsonString) {
         RecipeModel model = null;
+
         try {
             JSONObject response = new JSONObject(jsonString);
             JSONArray matches = response.getJSONArray("matches");
@@ -17,6 +18,9 @@ public class RecipeParser {
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
+            JSONArray images = response.getJSONArray("smallImageUrls");
+            model.setRecipeImageUrl(images.getString(0));
+
         } catch (JSONException e) {
             // do something useful with exception
         }
