@@ -15,13 +15,11 @@ public class RecipeParser {
             JSONArray matches = response.getJSONArray("matches");
             JSONObject recipe = matches.getJSONObject(0);
 
-//            JSONArray smallImageUrls = response.getJSONArray("smallImageUrls");
-//            JSONObject image = smallImageUrls.getJSONObject(0);
-
+            JSONArray smallImageUrls = recipe.getJSONArray("smallImageUrls");
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
-//            model.setRecipeImageUrl(image.getString("recipeImageUrl"));
+            model.setRecipeImageUrl(smallImageUrls.get(0).toString());
         } catch (JSONException e) {
             // do something useful with exception
         }
