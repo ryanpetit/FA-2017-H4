@@ -21,7 +21,6 @@ public class SearchActivity extends AppCompatActivity {
     private Button searchButton;
     private RecipeCallbackListener recipeCallbackListener;
     private static final String errorMessage = "Why is my damn recipeModel null?";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
