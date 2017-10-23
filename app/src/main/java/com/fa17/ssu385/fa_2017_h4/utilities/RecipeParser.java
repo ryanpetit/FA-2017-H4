@@ -10,13 +10,24 @@ import org.json.JSONObject;
 public class RecipeParser {
     public static final RecipeModel recipeFromJson(String jsonString) {
         RecipeModel model = null;
+
         try {
+
+
             JSONObject response = new JSONObject(jsonString);
             JSONArray matches = response.getJSONArray("matches");
             JSONObject recipe = matches.getJSONObject(0);
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
+
+            JSONArray url = response.getJSONArray("smallImageUrls");
+            JSONObject recipeImageUrl = url.getJSONObject(0);
+
+            model.setRecipeImageUrl(recipeImageUrl.getString("smallImageUrl"));
+
+
+
         } catch (JSONException e) {
             // do something useful with exception
         }
