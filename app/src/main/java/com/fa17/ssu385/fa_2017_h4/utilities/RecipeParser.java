@@ -1,8 +1,6 @@
 package com.fa17.ssu385.fa_2017_h4.utilities;
 
-
 import com.fa17.ssu385.fa_2017_h4.models.RecipeModel;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +15,11 @@ public class RecipeParser {
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
-        } catch (JSONException e) {
+
+            JSONArray smallImageUrls = response.getJSONArray("smallImageUrls");
+            model.setRecipeImageUrl(smallImageUrls.getString(0));
+
+        } catch (JSONException exception) {
             // do something useful with exception
         }
         return model;
