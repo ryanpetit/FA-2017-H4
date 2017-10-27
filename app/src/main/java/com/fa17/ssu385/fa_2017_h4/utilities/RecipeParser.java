@@ -18,26 +18,23 @@ public class RecipeParser {
             JSONArray matches = response.getJSONArray("matches");
             JSONObject recipe = matches.getJSONObject(0);
 
-            model = new RecipeModel();
+            /*model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
 
             JSONArray url = response.getJSONArray("smallImageUrls");
             JSONObject recipeImageUrl = url.getJSONObject(0);
 
-            model.setRecipeImageUrl(recipeImageUrl.getString("smallImageUrl"));
+            model.setRecipeImageUrl(recipeImageUrl.getString("smallImageUrl"));*/
 
 
-           /*
-            * Why doesn't this work?
 
-            JSONArray smallImages = response.getJSONArray("smallImageUrls");
 
+            JSONArray smallImages = recipe.getJSONArray("smallImageUrls");
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
             model.setRecipeImageUrl(smallImages.getString(0));
 
-            */
 
         } catch (JSONException e) {
             // do something useful with exception
@@ -45,3 +42,4 @@ public class RecipeParser {
         return model;
     }
 }
+
