@@ -46,8 +46,5 @@ public class SearchActivity extends AppCompatActivity {
                 task.execute(searchEditText.getText().toString());
             }
         });
-
-
-
     }
 }
