@@ -25,10 +25,10 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        recipeName = (TextView) view.findViewById(R.id.recipe_name);
-        recipeThumbnail = (ImageView) view.findViewById(R.id.recipe_thumbnail);
-        searchEditText = (EditText) view.findViewById(R.id.search_edit_text);
-        searchButton = (Button) view.findViewById(R.id.my_search_button);
+        recipeName = (TextView)view.findViewById(R.id.recipe_name);
+        recipeThumbnail = (ImageView)view.findViewById(R.id.recipe_thumbnail);
+        searchEditText = (EditText)view.findViewById(R.id.search_edit_text);
+        searchButton = (Button)view.findViewById(R.id.my_search_button);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
