@@ -15,7 +15,7 @@ public class RecipeParser {
             JSONArray matches = response.getJSONArray("matches");
             JSONObject recipe = matches.getJSONObject(0);
             JSONArray images = recipe.getJSONArray("smallImageUrls");
-            // JSONObject pic = images.getJSONObject(0);
+            // JSONObject pic = images.getJSONObject(0);ghgjgjhgjghjg
 
             model = new RecipeModel();
             model.setRecipeName(recipe.getString("recipeName"));
