@@ -25,10 +25,10 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        recipeName = (TextView)view.findViewById(R.id.recipe_name);
-        recipeThumbnail = (ImageView)view.findViewById(R.id.recipe_thumbnail);
-        searchEditText = (EditText)view.findViewById(R.id.search_edit_text);
-        searchButton = (Button)view.findViewById(R.id.my_search_button);
+        recipeName = (TextView)findViewById(R.id.recipe_name);
+        recipeThumbnail = (ImageView)findViewById(R.id.recipe_thumbnail);
+        searchEditText = (EditText)findViewById(R.id.search_edit_text);
+        searchButton = (Button)findViewById(R.id.my_search_button);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,12 +37,12 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onRecipeCallback(RecipeModel recipeModel) {
                         recipeName.setText(recipeModel.getRecipeName());
-                        RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
-                        task.setRecipeCallbackListener(recipeCallbackListener);
-                        task.execute(searchEditText.getText().toString());
                     }
 
                 };
+                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+                task.setRecipeCallbackListener(recipeCallbackListener);
+                task.execute(searchEditText.getText().toString());
             }
                                         }
 
