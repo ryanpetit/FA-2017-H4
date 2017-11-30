@@ -22,14 +22,30 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
 
     @Override
     protected RecipeModel doInBackground(String... params) {
-
+        String searchParams = params[0];
+        String urlParamKeys[] = {"_app_key", "_app_id", "your_search_parameters"};
+        String urlParamValues[] = {apiKey, appId, searchParams};
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(baseApiUrl).newBuilder();
+        for(int i = 0; i < urlParamKeys.length; i++)
+            urlBuilder.addQueryParameter(urlParamKeys[i], urlParamValues[i]);
+        String url = urlBuilder.build().toString();
+        Request request = new Request.Builder().url(url).build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            if(request != null)
+                return RecipeParser.recipeFromJson(response.body().string());
+        }catch(IOException e) {
+            //do something with exception
+        }
         return null;
     }
 
     @Override
     protected void onPostExecute(RecipeModel recipeModel) {
         super.onPostExecute(recipeModel);
-
+        recipeCallbackListener.onRecipeCallback(recipeModel);
     }
 
     public void setRecipeCallbackListener(RecipeCallbackListener recipeCallbackListener) {
