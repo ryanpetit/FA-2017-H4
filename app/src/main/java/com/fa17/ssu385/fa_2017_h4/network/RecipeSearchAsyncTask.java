@@ -17,7 +17,6 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
     private String baseApiUrl = "http://api.yummly.com/v1/api/recipes";
     private String apiKey = "ec3e34e0bb6801670dbd3dbd02ce7608";
     private String appId = "4911b643";
-
     private RecipeCallbackListener recipeCallbackListener;
 
     @Override
@@ -46,11 +45,10 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
     @Override
     protected void onPostExecute(RecipeModel recipeModel) {
         super.onPostExecute(recipeModel);
-
+        this.recipeCallbackListener.onRecipeCallback(recipeModel);
     }
 
     public void setRecipeCallbackListener(RecipeCallbackListener recipeCallbackListener) {
         this.recipeCallbackListener = recipeCallbackListener;
     }
-
 }
