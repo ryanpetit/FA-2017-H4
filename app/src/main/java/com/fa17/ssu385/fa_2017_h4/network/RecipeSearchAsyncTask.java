@@ -9,6 +9,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+
 import java.io.IOException;
 
 
@@ -23,12 +24,41 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeModel
     @Override
     protected RecipeModel doInBackground(String... params) {
 
+        String searchParams = params[0];
+		
+        OkHttpClient client = new OkHttpClient();
+		
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(baseApiUrl).newBuilder();
+		
+        urlBuilder.addQueryParameter("_app_key", apiKey);
+		
+        urlBuilder.addQueryParameter("_app_id", appId);
+		
+        urlBuilder.addQueryParameter("your_search_parameters", searchParams);
+
+        String url = urlBuilder.build().toString();
+		
+        Request request = new Request.Builder().url(url).build();
+		
+        Response response = null;
+
+        try {
+            response = client.newCall(request).execute();
+
+            if (response != null) {
+                return RecipeParser.recipeFromJson(response.body().string());
+            }
+        } catch (IOException e) {
+            // do something with exception
+        }
+
         return null;
     }
 
     @Override
     protected void onPostExecute(RecipeModel recipeModel) {
         super.onPostExecute(recipeModel);
+        recipeCallbackListener.onRecipeCallback(recipeModel);
 
     }
 
